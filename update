@@ -3,5 +3,3 @@
 #Get latest version of loop-server
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
 
-#Update the database
-mysql -u atomjump -pnemesis1235 -e "CREATE INDEX ordered_ssshout_id ON tbl_ssshout (enm_active, int_layer_id, date_when_shouted, int_ssshout_id, var_whisper_to, var_ip); CREATE INDEX ordered_ssshout_big_id ON tbl_ssshout (enm_active, int_layer_id, date_when_shouted, int_ssshout_id, var_whisper_to, var_ip, int_author_id, int_whisper_to_id); ALTER TABLE tbl_ssshout DROP INDEX ordered_ssshout_full; ALTER TABLE tbl_ssshout DROP INDEX ordered_ssshout_big;"
