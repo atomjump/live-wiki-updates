@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#Run with:
+#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update)"
+
 #Get latest version of loop-server
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
+
+#Update the main livewiki
+sudo git -C /jet/www/default/livewiki pull
+
 
