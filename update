@@ -12,14 +12,13 @@ sudo git -C /jet/www/default/livewiki pull
 #Update the npm version for sentiment analysis
 curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
 sudo apt-get install -y nodejs
-sudo npm install -g /jet/www/default/vendor/atomjump/loop-server/node
 sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet/www/default/vendor/atomjump/loop-server/node
 
 #Add a sentiment analysis crontab - but only do this once.
-if [test -f /home/localadmin/sentiment-setup.txt] then
-	echo "Sentiment has already been set up.\n"
+if [test -f /home/localadmin/sentiment-setup.txt]; then
+	echo "Sentiment has already been set up.\n";
 else
 	touch /home/localadmin/sentiment-setup.txt 
 	line="*/1 * * * *     /usr/bin/node /jet/www/default/vendor/atomjump/loop-server/node/sentiment.js"; (sudo crontab -u root -l; echo "$line" ) | sudo crontab -u root -
-	echo "Sentiment checker has been added to your crontab."
+	echo "Sentiment checker has been added to your crontab.";
 fi
