@@ -10,8 +10,10 @@ sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
 sudo git -C /jet/www/default/livewiki pull
 
 #Update the npm version for sentiment analysis
-export PATH=/home/peter/.nvm/versions/v4.2.6/bin/:$PATH
-npm install /jet/www/default/vendor/atomjump/loop-server/node
+curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+sudo apt-get install -y nodejs
+sudo npm install -g /jet/www/default/vendor/atomjump/loop-server/node
+sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet/www/default/vendor/atomjump/loop-server/node
 
-#Add a sentiment analysis crontab
-line="*/1 * * * *     /home/peter/.nvm/versions/v4.2.6/bin/node /jet/www/default/vendor/atomjump/loop-server/node/sentiment.js"; (sudo crontab -u root -l; echo "$line" ) | sudo crontab -u root -
+#Add a sentiment analysis crontab - but only do this once.
+line="*/1 * * * *     /usr/bin/node /jet/www/default/vendor/atomjump/loop-server/node/sentiment.js"; (sudo crontab -u root -l; echo "$line" ) | sudo crontab -u root -
