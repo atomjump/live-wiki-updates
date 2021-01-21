@@ -37,5 +37,5 @@ sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/lang
 
 #Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
 sudo wget  https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt
-sudo mv language-update.txt language-update.php 
-sudo /jet/bin/php language-update.php
+sudo mv update-language.txt update-language.php 
+sudo /jet/bin/php update-language.php
