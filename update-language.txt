@@ -19,7 +19,7 @@
 						$new_js_filename_escaped = str_replace("../..", "", $new_js_filename);
 						$new_js_filename_escaped = str_replace("/", "\/", $new_js_filename_escaped);
 						
-						$replacer_command = "sudo sed -ie 's/\"chatInnerJSFilename\": \".*\"/\"chatInnerJSFilename\": \"" . $new_js_filename_escaped . "\"/g' ../config.json";
+						$replacer_command = "sudo sed -ie 's/\"chatInnerJSFilename\": \".*\"/\"chatInnerJSFilename\": \"" . $new_js_filename_escaped . "\"/g' /jet/www/default/vendor/atomjump/loop-server/config/config.json";
 						echo $replacer_command . "\n";
 						exec($replacer_command);
 
@@ -45,7 +45,7 @@
 						//Put the chat.js file into a string               
 						$message_script_str = file_get_contents("chats.js");            //Get the new messages for this js file
 						$js_script_str = file_get_contents($chatjs);
-						$new_js_script_str = preg_replace('#lsmsg = (.*?)var lang#s','lsmsg = ' . $message_script_str . '\nvar lang', $js_script_str);
+						$new_js_script_str = preg_replace('#var lsmsg = (.*?)var lang#s','var lsmsg = ' . $message_script_str . '\n\rvar lang', $js_script_str);
 						//Write out the new js file, overwriting the old one
 						file_put_contents($chatjs, $new_js_script_str);
 					}
