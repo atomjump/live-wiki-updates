@@ -29,7 +29,6 @@ sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/lang
 
 #Get the latest language .js entries
 sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
- -P /jet/www/default/livewiki/js/
  
 sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
 
