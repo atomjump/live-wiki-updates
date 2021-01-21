@@ -26,7 +26,7 @@
                 		
                 }
 
-        	}*/
+        	}//*/
         	
         	
         	//Also tweak the front chat js.
