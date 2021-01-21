@@ -35,7 +35,7 @@ while true; do
 				sudo rm chat-inner.js 
 				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
 
-				sudo rm chats.js  
+				sudo rm chats.js 
 				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
 
 
@@ -44,7 +44,7 @@ while true; do
 				#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
 				sudo rm update-language.txt
 				sudo rm update-language.php
-				sudo wget  https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt
+				sudo curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt > update-language.txt
 				
 				sudo mv update-language.txt update-language.php 
 				sudo /jet/bin/php update-language.php
