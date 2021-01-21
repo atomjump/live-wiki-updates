@@ -42,7 +42,10 @@ while true; do
 				#/jet/www/default/livewiki/js/chat-1.0.9.js
 
 				#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
+				sudo rm update-language.txt
+				sudo rm update-language.php
 				sudo wget  https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt
+				
 				sudo mv update-language.txt update-language.php 
 				sudo /jet/bin/php update-language.php
         		break;;
