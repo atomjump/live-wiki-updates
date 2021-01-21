@@ -27,7 +27,7 @@ fi
 while true; do
     read -p "Do you wish to update to the latest version of the languages translations  from AtomJump (15 languages)?" yn
     case $yn in
-        [Yy]* ) make install; break;;
+        [Yy]* ) echo "Add in here"; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
