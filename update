@@ -27,8 +27,24 @@ fi
 while true; do
     read -p "Do you wish to update to the latest version of the languages translations from AtomJump (15 languages) (Enter yes or no)?" yn
     case $yn in
-        [Yy]* ) echo "Add in here"; 
-        		
+        [Yy]* ) #Get the latest language file with all languages
+				sudo mv /jet/www/default/vendor/atomjump/loop-server/config/messages.json /jet/www/default/vendor/atomjump/loop-server/config/messages-old-backup.json;
+				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/
+
+				#Get the latest language .js entries
+				sudo rm chat-inner.js 
+				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
+
+				sudo rm chats.js  
+				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
+
+
+				#/jet/www/default/livewiki/js/chat-1.0.9.js
+
+				#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
+				sudo wget  https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt
+				sudo mv update-language.txt update-language.php 
+				sudo /jet/bin/php update-language.php
         		break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
@@ -36,21 +52,3 @@ while true; do
 done
 
 
-#Get the latest language file with all languages
-sudo mv /jet/www/default/vendor/atomjump/loop-server/config/messages.json /jet/www/default/vendor/atomjump/loop-server/config/messages-old-backup.json;
-sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/
-
-#Get the latest language .js entries
-sudo rm chat-inner.js 
-sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
-
-sudo rm chats.js  
-sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
-
-
-#/jet/www/default/livewiki/js/chat-1.0.9.js
-
-#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
-sudo wget  https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt
-sudo mv update-language.txt update-language.php 
-sudo /jet/bin/php update-language.php
