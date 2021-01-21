@@ -23,3 +23,6 @@ else
 	echo "Sentiment checker has been added to your crontab.";
 fi
 
+#Get the latest language file with all languages
+sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/messages.json
+
