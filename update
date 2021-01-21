@@ -46,7 +46,7 @@ while true; do
 				sudo mv update-language.txt update-language.php 
 				sudo /jet/bin/php update-language.php
         		break;;
-        [Nn]* ) exit;;
+        [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
