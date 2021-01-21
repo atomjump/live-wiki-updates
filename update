@@ -15,7 +15,7 @@ sudo apt-get install -y nodejs
 sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet/www/default/vendor/atomjump/loop-server/node
 
 #Add a sentiment analysis crontab - but only do this once.
-if [test -f ~/sentiment-setup.txt]; then
+if test -f ~/sentiment-setup.txt; then
 	echo "Sentiment has already been set up.\n";
 else
 	touch ~/sentiment-setup.txt 
