@@ -25,7 +25,7 @@ fi
 
 
 while true; do
-    read -p "Do you wish to update to the latest version of the languages translations  from AtomJump (15 languages) (Enter yes or no)?" yn
+    read -p "Do you wish to update to the latest version of the languages translations from AtomJump (15 languages) (Enter yes or no)?" yn
     case $yn in
         [Yy]* ) echo "Add in here"; break;;
         [Nn]* ) exit;;
@@ -39,8 +39,10 @@ sudo mv /jet/www/default/vendor/atomjump/loop-server/config/messages.json /jet/w
 sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/
 
 #Get the latest language .js entries
+sudo rm chat-inner.js 
 sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
- 
+
+sudo rm chats.js  
 sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
 
 
