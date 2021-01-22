@@ -29,9 +29,10 @@
 							//it already exists in the file.
 						} else {
 							//Add in the chatInnerJSFilename to the config file.
+							$config_str = str_replace("\"phpPath\": \"/usr/bin/php\",","\"phpPath\": \"/jet/bin/php\",", $config_str);
 							$config_str = str_replace("\"phpPath\": \"/jet/bin/php\",",
-									    				"\"phpPath\": \"/jet/bin/php\",\n
-									     				\"chatInnerJSFilename\": \"\",", $config_str);
+									    				"\"phpPath\": \"/jet/bin/php\",
+									     				\"chatInnerJSFilename\": \"\",\n", $config_str);
 							
 							//Rewrite the file
 							file_put_contents($config_file, $config_str);
