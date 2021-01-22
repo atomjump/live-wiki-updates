@@ -13,7 +13,7 @@
                         $new_js_script_str = str_replace("//Language & messages configuration\n","", $js_script_str); 	//Remove the old lines at the top
 						$new_js_script_str = str_replace("//Note: also see /config/messages.json for further messages configuration\n","", $new_js_script_str); 		//Remove the old lines at the top
                         
-                        $new_js_script_str = preg_replace('#lsmsg = (.*?)var lang#s',$message_script_str . "var lang", $js_script_str);
+                        $new_js_script_str = preg_replace('#var lsmsg = (.*?)var lang#s',$message_script_str . "var lang", $new_js_script_str);
                 		//Write out the new live js file (not version controlled), alongside the old one (which is version controlled). The config.json points at this live version.
                 		$new_js_filename = str_replace("chat-inner-", "chat-inner-live-" , $file_array[0]);
 						file_put_contents($new_js_filename, $new_js_script_str);
