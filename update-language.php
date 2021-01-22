@@ -47,8 +47,8 @@
 						//Put the chat.js file into a string               
 						$message_script_str = file_get_contents("chats.js");            //Get the new messages for this js file
 						$js_script_str = file_get_contents($chatjs);
-						$new_js_script_str = str_replace('\/\/Language & messages configuration','', $js_script_str); 	//Remove the old lines at the top
-						$new_js_script_str = str_replace('\/\/Note: also see /config/messages.json for further messages configuration','', $new_js_script_str); 		//Remove the old lines at the top
+						$new_js_script_str = str_replace("//Language & messages configuration","", $js_script_str); 	//Remove the old lines at the top
+						$new_js_script_str = str_replace("//Note: also see /config/messages.json for further messages configuration","", $new_js_script_str); 		//Remove the old lines at the top
 		
 						$new_js_script_str = preg_replace('#var lsmsg = (.*?)var lang#s','' . $message_script_str . 'var lang', $new_js_script_str);
 						//Write out the new js file, overwriting the old one
