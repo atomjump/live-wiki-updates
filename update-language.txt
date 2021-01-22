@@ -2,15 +2,18 @@
 	// /jet/www/default/livewiki/js/chat-1.0.9.js
 		    //Allow tweaks to the other messages file within the javascript
 			
-			//TODO: Change the base js file (note, we already have all 15 languages in here)
-			/*
+			//Change the base js file (note, we already have all 15 languages in here - this is an update)
+			
 			if(file_exists("/jet/www/default/vendor/atomjump/loop-server/js/")) {          //looking for chat-inner*, but so long as the dir exists a file should be there
                 //Put the chat-inner* file into a string
                 $file_array = glob("/jet/www/default/vendor/atomjump/loop-server/js/chat-inner*");
                 if($file_array[0]) {
                         $message_script_str = file_get_contents("chat-inner.js");            //Get the new messages for this js file
                         $js_script_str = file_get_contents($file_array[0]);
-                        $new_js_script_str = preg_replace('#lsmsg = (.*?)var lang#s',$message_script_str . "\nvar lang", $js_script_str);
+                        $new_js_script_str = str_replace("//Language & messages configuration\n","", $js_script_str); 	//Remove the old lines at the top
+						$new_js_script_str = str_replace("//Note: also see /config/messages.json for further messages configuration\n","", $new_js_script_str); 		//Remove the old lines at the top
+                        
+                        $new_js_script_str = preg_replace('#lsmsg = (.*?)var lang#s',$message_script_str . "var lang", $js_script_str);
                 		//Write out the new live js file (not version controlled), alongside the old one (which is version controlled). The config.json points at this live version.
                 		$new_js_filename = str_replace("chat-inner-", "chat-inner-live-" , $file_array[0]);
 						file_put_contents($new_js_filename, $new_js_script_str);
@@ -19,8 +22,21 @@
 						$new_js_filename_escaped = str_replace("../..", "", $new_js_filename);
 						$new_js_filename_escaped = str_replace("/", "\/", $new_js_filename_escaped);
 						
-						//TODO: Check if 'chatInnerJSFilename' already exists in the config file. ADd to staging/production if not.
-						
+						//Check if 'chatInnerJSFilename' already exists in the config file. Add to staging/production if not.
+						$config_file = "/jet/www/default/vendor/atomjump/loop-server/config/config.json";
+						$config_str = file_get_contents($config_file);
+						if(strpos($config_str, "chatInnerJSFilename") != false) {
+							//it already exists in the file.
+						} else {
+							//Add in the chatInnerJSFilename to the config file.
+							$config_str = str_replace("\"phpPath\": \"/jet/bin/php\",",
+									    				"\"phpPath\": \"/jet/bin/php\",\n
+									     				\"chatInnerJSFilename\": \"\",", $config_str);
+							
+							//Rewrite the file
+							file_put_contents($config_file, $config_str);
+						}
+							
 						$replacer_command = "sudo sed -ie 's/\"chatInnerJSFilename\": \".*\"/\"chatInnerJSFilename\": \"" . $new_js_filename_escaped . "\"/g' /jet/www/default/vendor/atomjump/loop-server/config/config.json";
 						echo $replacer_command . "\n";
 						exec($replacer_command);
@@ -28,7 +44,7 @@
                 		
                 }
 
-        	}*/
+        	}
         	
         	
         	//Also tweak the front chat js.
@@ -47,8 +63,8 @@
 						//Put the chat.js file into a string               
 						$message_script_str = file_get_contents("chats.js");            //Get the new messages for this js file
 						$js_script_str = file_get_contents($chatjs);
-						$new_js_script_str = str_replace("//Language & messages configuration","", $js_script_str); 	//Remove the old lines at the top
-						$new_js_script_str = str_replace("//Note: also see /config/messages.json for further messages configuration","", $new_js_script_str); 		//Remove the old lines at the top
+						$new_js_script_str = str_replace("//Language & messages configuration\n","", $js_script_str); 	//Remove the old lines at the top
+						$new_js_script_str = str_replace("//Note: also see /config/messages.json for further messages configuration\n","", $new_js_script_str); 		//Remove the old lines at the top
 		
 						$new_js_script_str = preg_replace('#var lsmsg = (.*?)var lang#s','' . $message_script_str . 'var lang', $new_js_script_str);
 						//Write out the new js file, overwriting the old one
