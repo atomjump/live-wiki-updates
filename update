@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Run with:
-#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update)"
+#eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update)"
 
 #Get latest version of loop-server
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
@@ -29,14 +29,14 @@ while true; do
     case $yn in
         [Yy]* ) #Get the latest language file with all languages
 				sudo mv /jet/www/default/vendor/atomjump/loop-server/config/messages.json /jet/www/default/vendor/atomjump/loop-server/config/messages-old-backup.json;
-				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/
+				sudo wget https://git.atomjump.com/change_language.git/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/messages.json -P /jet/www/default/vendor/atomjump/loop-server/config/
 
 				#Get the latest language .js entries
 				sudo rm chat-inner.js 
-				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
+				sudo wget https://git.atomjump.com/change_language.git/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chat-inner.js 
 
 				sudo rm chats.js 
-				sudo wget https://raw.githubusercontent.com/atomjump/change_language/master/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
+				sudo wget https://git.atomjump.com/change_language.git/languages/en_bg_ch_cht_de_es_fr_hi_in_it_jp_ko_pu_ru/chats.js
 
 
 				#/jet/www/default/livewiki/js/chat-1.0.9.js
@@ -44,7 +44,7 @@ while true; do
 				#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
 				sudo rm update-language.txt
 				sudo rm update-language.php
-				sudo curl -fsSL -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/atomjump/live-wiki-updates/master/update-language.txt > update-language.txt
+				sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-language.txt > update-language.txt
 				
 				sudo mv update-language.txt update-language.php 
 				sudo /jet/bin/php update-language.php
