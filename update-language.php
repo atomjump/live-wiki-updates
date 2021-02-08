@@ -77,8 +77,8 @@
 		//And now update the notifications .config.json 
 		$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
 		$config_original_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/configDEFAULT.json";
-		$config_json = json_decode(file_get_contents($config_file));
-		$config_original_json = json_decode(file_get_contents($config_original_file));
+		$config_json = json_decode(file_get_contents($config_file), true);
+		$config_original_json = json_decode(file_get_contents($config_original_file), true);
 		
 		//Copy across new Android link
 		$android_app_link = $config_original_json['androidAppLink'];
@@ -89,8 +89,7 @@
 		$config_json['msgs'] = $msgs;
 		
 		//And update the config file
-		//TEST FIRSTfile_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT));
-		echo json_encode($config_json, JSON_PRETTY_PRINT);
-
+		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+		echo "Updated notifications plugin configuration.\n";
 
 ?>
