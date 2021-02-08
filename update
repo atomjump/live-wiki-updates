@@ -30,6 +30,14 @@ else
 	echo "Sentiment checker has been added to your crontab.";
 fi
 
+#Update notifications
+sudo rm update-language.txt
+sudo rm update-language.php
+sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-language.txt > update-language.txt
+
+sudo mv update-language.txt update-language.php 
+sudo /jet/bin/php update-language.php notifications
+
 
 while true; do
     read -p "Do you wish to update to the latest version of the languages translations from AtomJump (15 languages) (Enter yes or no)?" yn
@@ -49,12 +57,8 @@ while true; do
 				#/jet/www/default/livewiki/js/chat-1.0.9.js
 
 				#Get a php script and run this to replace /jet/www/default/livewiki/js/chat-*.js
-				sudo rm update-language.txt
-				sudo rm update-language.php
-				sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-language.txt > update-language.txt
-				
-				sudo mv update-language.txt update-language.php 
-				sudo /jet/bin/php update-language.php
+
+				sudo /jet/bin/php update-language.php languages
         		break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;

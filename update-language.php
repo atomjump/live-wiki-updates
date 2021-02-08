@@ -1,5 +1,13 @@
 <?php
 	
+	 $languages = false;
+	 
+	 foreach($argv as $entry) {
+	 	if($entry == "languages") $languages = true;
+	 }
+	
+	 if($languages == true) {
+	
 		//Allow tweaks to the main chat-inner-x.y.z.js file, so that the latest translations can be used.
 		
 		//Change the base js file (note, we already have all 15 languages in here - this is an update)
@@ -45,7 +53,11 @@
 			}
 
 		}
-		
+	
+	
+	
+	
+	
 		
 		//Also tweak the front chat js. E.g. /jet/www/default/livewiki/js/chat-1.0.9.js
 		//Loop through each chat-*.js
@@ -72,7 +84,16 @@
 				}
 			}
 		}
-
+	}
+	
+	
+	$notifications = false;
+	 
+	foreach($argv as $entry) {
+	 	if($entry == "notifications") $notifications = true;
+	}
+	
+	if($notifications == true) {		
 
 		//And now update the notifications .config.json 
 		$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
@@ -91,5 +112,6 @@
 		//And update the config file
 		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
 		echo "Updated notifications plugin configuration.\n";
+	}
 
 ?>
