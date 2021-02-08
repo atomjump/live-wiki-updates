@@ -9,10 +9,17 @@ sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
 #Update the main livewiki
 sudo git -C /jet/www/default/livewiki pull
 
+#Update the notifications plugin
+sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/notifications pull
+
+
+
 #Update the npm version for sentiment analysis
 curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
 sudo apt-get install -y nodejs
 sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet/www/default/vendor/atomjump/loop-server/node
+
+
 
 #Add a sentiment analysis crontab - but only do this once.
 if test -f ~/sentiment-setup.txt; then
