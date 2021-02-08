@@ -97,7 +97,7 @@
 
 		//And now update the notifications .config.json 
 		$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
-		$config_original_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/configDEFAULT.json";
+		$config_original_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/configORIGINAL.json";
 		$config_json = json_decode(file_get_contents($config_file), true);
 		$config_original_json = json_decode(file_get_contents($config_original_file), true);
 		
