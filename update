@@ -31,6 +31,10 @@ else
 fi
 
 #Update notifications
+sudo /jet/bin/php /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/install.php
+sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/outgoing
+
+
 sudo rm update-language.txt
 sudo rm update-language.php
 sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-language.txt > update-language.txt
