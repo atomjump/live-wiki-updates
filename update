@@ -12,6 +12,10 @@ sudo git -C /jet/www/default/livewiki pull
 #Update the notifications plugin
 sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/notifications pull
 
+#Update the large_emoticons plugin
+sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/emoticons_large pull
+
+
 
 
 #Update the npm version for sentiment analysis
