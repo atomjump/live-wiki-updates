@@ -10,6 +10,7 @@
 	 $smtp_user = "youremail@yourcompany.com";
 	 $smtp_pass = "yourpassword";
 	 $smtp_port = "2525";
+	 $appliance_type = "staging";
 	 
 
 	//Prompt to confirm we have the correct address 127.0.0.1	
@@ -37,7 +38,7 @@
 		echo "Using admin email:" . $admin_email . "\n";
 	}
 	
-	echo "\nWhat is your webmaster email address? [" . $webmaster_email . "]\nPush enter to keep '" . $webmaster_email . "', or type in a different email address (note: this is potentially visible to users):\n";		//TODO: check and explain why this is different.
+	echo "\nWhat is your webmaster email address? [" . $webmaster_email . "]\nPush enter to keep '" . $webmaster_email . "', or type in a different email address (note: this is potentially visible to users):\n";
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$webmaster_email = $input;
@@ -79,6 +80,13 @@
 		echo "Using SMTP port:" . $smtp_port . "\n";
 	}
 	
+	echo "\nDo you wish to use these email settings on a 'staging' Appliance, a 'production' Appliance, or both? [" . $appliance_type . "]\nPush enter to keep '" . $appliance_type . "', or type in 'staging', 'production' or 'both'. (Note: the Appliance uses the 'staging' configuration entries by default):\n";		
+	$input = rtrim(fgets(STDIN));
+	if($input != "") {
+		$appliance_type = $input;
+		echo "Using Appliance settings:" . $appliance_type . "\n";
+	}
+	
 	
 	
 	$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
@@ -114,15 +122,29 @@
 	$config_json = json_decode($config_file_str);
 	if($config_json) {
 	
-		$config_json->staging->email->adminEmail = $admin_email;
-		$config_json->staging->email->webmasterEmail = $webmaster_email;
-		$config_json->staging->email->noReplyEmail = $noreply_email;
+		if(($appliance_type == "staging")||($appliance_type == "both")) {
+			$config_json->staging->email->adminEmail = $admin_email;
+			$config_json->staging->email->webmasterEmail = $webmaster_email;
+			$config_json->staging->email->noReplyEmail = $noreply_email;
 		
-		$config_json->staging->email->sending->use = "smtp";
-		$config_json->staging->email->sending->smtp = $smtp_server_host;
-		$config_json->staging->email->sending->user = $smtp_user;
-		$config_json->staging->email->sending->pass = $smtp_pass;
-		$config_json->staging->email->sending->port = $smtp_port;
+			$config_json->staging->email->sending->use = "smtp";
+			$config_json->staging->email->sending->smtp = $smtp_server_host;
+			$config_json->staging->email->sending->user = $smtp_user;
+			$config_json->staging->email->sending->pass = $smtp_pass;
+			$config_json->staging->email->sending->port = $smtp_port;
+		}
+		
+		if(($appliance_type == "production")||($appliance_type == "both")) {
+			$config_json->production->email->adminEmail = $admin_email;
+			$config_json->production->email->webmasterEmail = $webmaster_email;
+			$config_json->production->email->noReplyEmail = $noreply_email;
+		
+			$config_json->production->email->sending->use = "smtp";
+			$config_json->production->email->sending->smtp = $smtp_server_host;
+			$config_json->production->email->sending->user = $smtp_user;
+			$config_json->production->email->sending->pass = $smtp_pass;
+			$config_json->production->email->sending->port = $smtp_port;
+		}
 	
 	
 		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
