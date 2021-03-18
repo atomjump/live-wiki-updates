@@ -10,8 +10,10 @@
 	 $smtp_user = "youremail@yourcompany.com";
 	 $smtp_pass = "yourpassword";
 	 $smtp_port = "2525";
+	 $smtp_encryption = "";
 	 $appliance_type = "staging";
 	 
+	 echo "\nAtomJump Messaging Appliance Notifications Setup. Welcome!\n==========================================================\n\n";
 
 	//Prompt to confirm we have the correct address 127.0.0.1	
 	echo "What is your AtomJump Messaging Appliance's base web address? [" . $server_url . "]\nPush enter to keep '" . $server_url . "', or type in a different address:\n";
@@ -80,6 +82,17 @@
 		echo "Using SMTP port:" . $smtp_port . "\n";
 	}
 	
+	echo "\nWhat encryption style does your SMTP account use? [" . $smtp_encryption . "]\nPush enter to keep '" . $smtp_encryption . "', or type in 'ssl', 'tls' or 'unknown':\n";		
+	$input = rtrim(fgets(STDIN));
+	if($input != "") 
+		if($input == "unknown") {
+			$smtp_encryption = "";
+		}
+		$smtp_encryption = $input;
+		echo "Using SMTP encryption:" . $smtp_encryption . "\n";
+	}
+	
+	
 	echo "\nDo you wish to use these email settings on a 'staging' Appliance, a 'production' Appliance, or both? [" . $appliance_type . "]\nPush enter to keep '" . $appliance_type . "', or type in 'staging', 'production' or 'both'. (Note: the Appliance uses the 'staging' configuration entries by default):\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
@@ -90,6 +103,7 @@
 	
 	
 	$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
+	$config_file = "/Users/apple/test/config-notifications.json";		//TESTING
 	
 	$config_file_str = file_get_contents($config_file); 
 	
@@ -117,6 +131,7 @@
 	
 	//Now update the main configuration for email setup.
 	$config_file = "/jet/www/default/vendor/atomjump/loop-server/config/config.json";
+	$config_file = "/Users/apple/test/config.json";		//TESTING
 	$config_file_str = file_get_contents($config_file); 
 	
 	$config_json = json_decode($config_file_str);
@@ -132,6 +147,7 @@
 			$config_json->staging->email->sending->user = $smtp_user;
 			$config_json->staging->email->sending->pass = $smtp_pass;
 			$config_json->staging->email->sending->port = $smtp_port;
+			$config_json->staging->email->sending->encryption = $smtp_encryption;
 		}
 		
 		if(($appliance_type == "production")||($appliance_type == "both")) {
@@ -144,6 +160,7 @@
 			$config_json->production->email->sending->user = $smtp_user;
 			$config_json->production->email->sending->pass = $smtp_pass;
 			$config_json->production->email->sending->port = $smtp_port;
+			$config_json->production->email->sending->encryption = $smtp_encryption;
 		}
 	
 	
