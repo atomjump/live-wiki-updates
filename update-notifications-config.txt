@@ -84,7 +84,7 @@
 	
 	echo "\nWhat encryption style does your SMTP account use? [" . $smtp_encryption . "]\nPush enter to keep '" . $smtp_encryption . "', or type in 'ssl', 'tls' or 'unknown':\n";		
 	$input = rtrim(fgets(STDIN));
-	if($input != "") 
+	if($input != "") {
 		if($input == "unknown") {
 			$smtp_encryption = "";
 		}
