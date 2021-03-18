@@ -20,62 +20,63 @@
 		echo "Using server URL:" . $server_url . "\n";
 	}
 	
-	echo "What is your country location? [" . $default_country . "]\nPush enter to keep '" . $default_country . "', or type in a different country (note: this is only used for display purposes):\n";
+	echo "\nWhat is your country location? [" . $default_country . "]\nPush enter to keep '" . $default_country . "', or type in a different country (note: this is only used for display purposes):\n";
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$default_country = $input;
 		echo "Using country:" . $default_country . "\n";
 	}
 	
-	echo "What is your admin email address? [" . $admin_email . "]\nPush enter to keep '" . $admin_email . "', or type in a different email address (note: this is only used on this Appliance, internally, and is not shared):\n";
+	echo "\nWhat is your admin email address? [" . $admin_email . "]\nPush enter to keep '" . $admin_email . "', or type in a different email address (note: this is only used on this Appliance, internally, and is not shared):\n";
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$admin_email = $input;
 		$webmaster_email = $admin_email;
-		$noreply_email = $admin_email;		
+		$noreply_email = $admin_email;	
+		$smtp_user = $admin_email;		
 		echo "Using admin email:" . $admin_email . "\n";
 	}
 	
-	echo "What is your webmaster email address? [" . $webmaster_email . "]\nPush enter to keep '" . $webmaster_email . "', or type in a different email address (note: this is potentially visible to users):\n";		//TODO: check and explain why this is different.
+	echo "\nWhat is your webmaster email address? [" . $webmaster_email . "]\nPush enter to keep '" . $webmaster_email . "', or type in a different email address (note: this is potentially visible to users):\n";		//TODO: check and explain why this is different.
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$webmaster_email = $input;
 		echo "Using webmaster email:" . $webmaster_email . "\n";
 	}
 	
-	echo "What is your 'no-reply' email address? [" . $noreply_email . "]\nPush enter to keep '" . $noreply_email . "', or type in a different email address (note: this will be visible to users in email notifications):\n";		
+	echo "\nWhat is your 'no-reply' email address? [" . $noreply_email . "]\nPush enter to keep '" . $noreply_email . "', or type in a different email address (note: this will be visible to users in email notifications):\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$noreply_email = $input;
 		echo "Using no-reply email:" . $noreply_email . "\n";
 	}
 	
-	echo "What is your SMTP email sending server's host address? [" . $smtp_server_host . "]\nPush enter to keep '" . $smtp_server_host . "', or type in a different host address (Note: for SMTP2GO usage you will need to create an account with smtp2go.com):\n";		
+	echo "\nWhat is your SMTP email sending server's host address? [" . $smtp_server_host . "]\nPush enter to keep '" . $smtp_server_host . "', or type in a different host address (Note: for SMTP2GO usage you will need to create an account with smtp2go.com):\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$smtp_server_host = $input;
 		echo "Using SMTP host:" . $smtp_server_host . "\n";
 	}
 	
-	echo "What is your SMTP account's username? [" . $smtp_user . "]\nPush enter to keep '" . $smtp_user . "', or type in a different username:\n";		
+	echo "\nWhat is your SMTP account's username? [" . $smtp_user . "]\nPush enter to keep '" . $smtp_user . "', or type in a different username:\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$smtp_user = $input;
 		echo "Using SMTP username:" . $smtp_user . "\n";
 	}
 	
-	echo "What is your SMTP account's password? [" . $smtp_pass . "]\nPush enter to keep '" . $smtp_pass . "', or type in a different username:\n";		
+	echo "\nWhat is your SMTP account's password? [" . $smtp_pass . "]\nPush enter to keep '" . $smtp_pass . "', or type in a different password:\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$smtp_pass = $input;
 		echo "Using SMTP password:" . $smtp_pass . "\n";
 	}
 	
-	echo "What is your SMTP account's port number? [" . $smtp_port . "]\nPush enter to keep '" . $smtp_port . "', or type in a different port number. (Note: this is the standard port for SMTP servers):\n";		
+	echo "\nWhat is your SMTP account's port number? [" . $smtp_port . "]\nPush enter to keep '" . $smtp_port . "', or type in a different port number. (Note: this is the standard port for SMTP servers):\n";		
 	$input = rtrim(fgets(STDIN));
 	if($input != "") {
 		$smtp_port = $input;
-		echo "Using SMTP password:" . $smtp_port . "\n";
+		echo "Using SMTP port:" . $smtp_port . "\n";
 	}
 	
 	
@@ -95,7 +96,7 @@
 		$config_json->iosNotifications->apiKeyFile = "";
 		$config_json->atomjumpNotifications->use = true;
 		$config_json->atomjumpNotifications->serverPool = array("Default" => array($server_url . ":5566"));
-		$config_json->atomjumpNotifications->countryServerResidingIn = array("Default" => $default_country);		//TODO: allow a different default country
+		$config_json->atomjumpNotifications->countryServerResidingIn = array("Default" => $default_country);
 		
 		
 		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
@@ -122,7 +123,6 @@
 		$config_json->staging->email->sending->user = $smtp_user;
 		$config_json->staging->email->sending->pass = $smtp_pass;
 		$config_json->staging->email->sending->port = $smtp_port;
-		
 	
 	
 		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
