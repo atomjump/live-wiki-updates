@@ -112,7 +112,7 @@ while true; do
 	
         	
         	#And explain to the user that they need to add two extra ports
-        	echo "AtomJump Notifications Installation successful!\n\nInside your 'Virtual Box Settings > Network > Advanced > Port forwarding', you will need to add two new ports:\n1. Host TCP 127.0.0.1 Port: 8000 >> Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)";
+        	echo "\n\nAtomJump Notifications Installation successful!\n\nInside your 'Virtual Box Settings > Network > Advanced > Port forwarding', you will need to add two new ports:\n1. Host TCP 127.0.0.1 Port: 8000 >> Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)";
         	echo "You should also configure your email and notifications below...\n";
         	
         break;;
