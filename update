@@ -74,8 +74,10 @@ while true; do
 done
 
 
+
+
 while true; do
-    read -p "Do you wish to install popup notifications for the app (Enter yes or no)?" yn
+    read -p "Do you wish to install/update popup notifications for the app (Enter yes or no)?" yn
     case $yn in
         [Yy]* ) #Install popup notifications
         
@@ -107,20 +109,11 @@ while true; do
 			sudo /jet/bin/php /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/install.php
 			sudo chmod 777 /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/outgoing
 			sudo cp /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config-old.json 
-			sudo cp /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/configORIGINAL.json /jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json 
-
-			#Download and run a PHP script locally to replace the entries to the config
-			#file
-			sudo rm update-notifications-config.txt
-			sudo rm update-notifications-config.php
-			sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-notifications-config.txt > update-notifications-config.txt
-
-			sudo mv update-notifications-config.txt update-notifications-config.php 
-        	sudo /jet/bin/php update-notifications-config.php 
+	
         	
         	#And explain to the user that they need to add two extra ports
-        	echo "Inside your 'Virtual Box Settings > Network > Advanced > Port forwarding', you will need to add two new ports:\n1. Host TCP 127.0.0.1 Port: 8000 >> Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)";
-        	echo "Installation successful!";
+        	echo "AtomJump Notifications Installation successful!\n\nInside your 'Virtual Box Settings > Network > Advanced > Port forwarding', you will need to add two new ports:\n1. Host TCP 127.0.0.1 Port: 8000 >> Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)";
+        	echo "You should also configure your email and notifications below...\n";
         	
         break;;
         [Nn]* ) break;;
@@ -128,3 +121,12 @@ while true; do
     esac
 done
 
+
+#Get the notifications update script
+sudo rm update-notifications-config.txt
+sudo rm update-notifications-config.php
+sudo curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update-notifications-config.txt > update-notifications-config.txt
+sudo mv update-notifications-config.txt update-notifications-config.php 
+
+#Ask on both email setup and notifications setup
+sudo /jet/bin/php update-notifications-config.php 		

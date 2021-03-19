@@ -110,7 +110,7 @@
 		$config_json['msgs'] = $msgs;
 		
 		//And update the config file
-		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+		file_put_contents($config_file, json_encode($config_json, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
 		echo "Updated notifications plugin configuration.\n";
 	}
 
