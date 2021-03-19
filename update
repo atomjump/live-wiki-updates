@@ -77,7 +77,7 @@ done
 
 
 while true; do
-    read -p "Do you wish to install/update popup notifications for the app (Enter yes or no)?" yn
+    read -p "Do you wish to install popup notifications for the app (Enter yes or no)?" yn
     case $yn in
         [Yy]* ) #Install popup notifications
         
