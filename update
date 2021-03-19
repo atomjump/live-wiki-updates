@@ -87,22 +87,27 @@ while true; do
 			cd "$(npm prefix -global)/lib/node_modules/medimage/" 
 			sudo cp config-original/linORIGINALconfig.json config.json
 			sudo cp addons/configORIGINAL.json addons/config.json
+			sudo pm2 delete 'medimage-server'
 			sudo pm2 start npm --name "medimage-server" -- start ./medimage-server.sh; cd ~
 			sudo pm2 save
-			sudo pm2 startup
+			
 			sudo ufw allow 5566/tcp
 
 			#Install app
 			git clone https://src.atomjump.com/atomjump/messaging app
 			cd app
 			git checkout browser-production
+			
 			sudo npm install -g cordova
 			sudo cordova platform add browser
 			sudo ufw allow 8000/tcp			
+			sudo pm2 delete 'sudo cordova run browser'
 			sudo pm2 start 'sudo cordova run browser'
 			sudo pm2 save
         
-        	sleep 2
+        	sudo pm2 startup
+        	echo "\n\n";
+        	sleep 5
         
         	#Update the notifications plugin and overwrite the config file
         	cd ~
