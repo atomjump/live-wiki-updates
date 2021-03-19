@@ -102,6 +102,7 @@ while true; do
 			sudo pm2 start 'sudo cordova run browser'
 			sudo pm2 save
         
+        	sleep 2
         
         	#Update the notifications plugin and overwrite the config file
         	cd ~
