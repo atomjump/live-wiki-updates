@@ -157,7 +157,6 @@
 	if($set_notifications == true) {
 	
 		$config_file = "/jet/www/default/vendor/atomjump/loop-server/plugins/notifications/config/config.json";
-		$config_file = "/Users/apple/test/config-notifications.json";		//TESTING
 	
 		$config_file_str = file_get_contents($config_file); 
 	
@@ -188,7 +187,6 @@
 	
 		//Now update the main configuration for email setup.
 		$config_file = "/jet/www/default/vendor/atomjump/loop-server/config/config.json";
-		$config_file = "/Users/apple/test/config.json";		//TESTING
 		$config_file_str = file_get_contents($config_file); 
 	
 		$config_json = json_decode($config_file_str);
