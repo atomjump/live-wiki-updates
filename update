@@ -107,6 +107,7 @@ while true; do
         
         	sudo pm2 startup
         	echo "\n\n";
+        	clear
         	sleep 5
         
         	#Update the notifications plugin and overwrite the config file
