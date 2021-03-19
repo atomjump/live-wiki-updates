@@ -27,11 +27,11 @@ sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet
 
 #Add a sentiment analysis crontab - but only do this once.
 if test -f ~/sentiment-setup.txt; then
-	echo "Sentiment has already been set up.\n";
+	printf "Sentiment has already been set up.\n";
 else
 	touch ~/sentiment-setup.txt 
 	line="*/1 * * * *     /usr/bin/node /jet/www/default/vendor/atomjump/loop-server/node/sentiment.js"; (sudo crontab -u root -l; echo "$line" ) | sudo crontab -u root -
-	echo "Sentiment checker has been added to your crontab.";
+	printf "Sentiment checker has been added to your crontab.\n";
 fi
 
 #Update notifications
@@ -106,7 +106,6 @@ while true; do
 			sudo pm2 save
         
         	sudo pm2 startup
-        	echo "\n\n";
         	clear
         	sleep 5
         
@@ -119,8 +118,8 @@ while true; do
 	
         	
         	#And explain to the user that they need to add two extra ports
-        	echo "\n\nAtomJump Notifications Installation successful!\n\nInside your 'Virtual Box Settings - Network - Advanced - Port forwarding', you will need to add two new ports:\n\n1. Host TCP 127.0.0.1 Port: 8000 -- Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)"
-        	echo "You should also configure your email and notifications below...\n"
+        	printf "\n\nAtomJump Notifications Installation successful.\n\nInside your 'Virtual Box Settings - Network - Advanced - Port forwarding', you will need to add two new ports:\n\n1. Host TCP 127.0.0.1 Port: 8000 -- Guest IP 10.0.2.15 Port:8000\n2. Host TCP 127.0.0.1 Port: 5566 -- Guest IP 10.0.2.15 Port:5566\n\n(replace 10.0.2.15 with your own IP addresses, if necessary)\n\n"
+        	printf "You should also configure your email and notifications below...\n\n"
         	
         break;;
         [Nn]* ) break;;
