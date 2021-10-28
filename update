@@ -3,6 +3,26 @@
 #Run with:
 #eval "$(curl -fsSL -H 'Cache-Control: no-cache' https://git.atomjump.com/live-wiki-updates.git/update)"
 
+
+#Upgrade the base PHP to 7.4 TODO: test and release this for more secure PHP version in future.  https://computingforgeeks.com/how-to-install-latest-php-on-debian/
+#sudo apt install software-properties-common -y
+#sudo apt update -y
+#sudo apt-get install dirmngr -y
+#sudo apt -y install lsb-release apt-transport-https ca-certificates 
+#sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+#echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+#sudo apt update -y; sudo apt install php7.4 -y; sudo apt-get install php7.4-mysql -y; sudo a2dismod php7.2; sudo a2enmod php7.4; sudo apt-get install php7.4-mbstring -y; sudo apt-get install php7.4-curl -y; sudo apt-get install php7.4-zip -y; sudo apt-get install php7.4-xml -y; sudo apt-get install php7.4-gd -y 
+#sudo service apache2 restart		#TODO: this line does not work
+
+#Ensure the new PHP version doesn't show notice errors.
+#sudo sed -i 's/^error_reporting.*$/error_reporting \= E_ALL \& \~E_NOTICE \& \~E_STRICT \& \~E_DEPRECATED/g' /jet/etc/php/7.4/php.ini
+
+#sudo sed -i 's/^error_reporting.*$/error_reporting \= E_ALL \& \~E_NOTICE \& \~E_STRICT \& \~E_DEPRECATED/g' /jet/etc/php/7.4/php.ini-development
+
+#sudo sed -i 's/^error_reporting.*$/error_reporting \= E_ALL \& \~E_NOTICE \& \~E_STRICT \& \~E_DEPRECATED/g' /jet/etc/php/7.4/php.ini-production
+
+
+
 #Get latest version of loop-server
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
 
