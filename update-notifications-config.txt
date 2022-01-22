@@ -164,7 +164,9 @@
 		if($config_json) {
 		
 			$config_json->serverPath = "/jet/www/default/vendor/atomjump/loop-server/";
-			$config_json->streamingAppLink = $server_url . ":8000";
+			$config_json->streamingAppLink = $server_url . ":8000";			
+			$config_json->iosAppLink = $server_url . ":8000";
+			$config_json->androidAppLink = $server_url . ":8000";
 			$config_json->androidNotifications->use = false;
 			$config_json->androidNotifications->apiKey = "";
 			$config_json->iosNotifications->use = false;
