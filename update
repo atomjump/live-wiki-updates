@@ -30,6 +30,8 @@ while true; do
         
         #Get rid of some excess Google leftovers
        	sudo apt remove -y google-cloud-sdk google-compute-engine google-compute-engine-oslogin google-cloud-packages-archive-keyring
+       	sudo rm /etc/apt/sources.list.d/google-cloud.list
+       	
        			
        	#And OS Upgrade it
        	sudo apt-get update; sudo apt-get dist-upgrade
@@ -74,7 +76,7 @@ sudo git -C /jet/www/default/vendor/atomjump/loop-server/plugins/emoticons_large
 
 
 #Update the npm version for sentiment analysis
-curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 sudo apt-get install -y nodejs
 sudo npm --prefix /jet/www/default/vendor/atomjump/loop-server/node install /jet/www/default/vendor/atomjump/loop-server/node
 
