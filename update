@@ -27,7 +27,11 @@ while true; do
     read -p "Do you wish to do a major update to the base operating system - recommended on the 1st run (Enter yes or no)?" yn
     case $yn in
         [Yy]* ) #Update base operating system
-       	sudo apt remove -y google-cloud-sdk
+        
+        #Get rid of some excess Google leftovers
+       	sudo apt remove -y google-cloud-sdk google-compute-engine google-compute-engine-oslogin google-cloud-packages-archive-keyring
+       			
+       	#And OS Upgrade it
        	sudo apt-get update; sudo apt-get dist-upgrade
   		
   		break;;
