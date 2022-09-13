@@ -23,6 +23,37 @@
 
 
 
+while true; do
+    read -p "Do you wish to do a major update to the base operating system - recommended on the 1st run (Enter yes or no)?" yn
+    case $yn in
+        [Yy]* ) #Update base operating system
+       	sudo apt remove -y google-cloud-sdk
+       	sudo apt-get update; sudo apt-get dist-upgrade
+  		
+  		break;;
+        [Nn]* ) 
+        
+        while true; do
+			read -p "Do you wish to do a minor update to the base operating system (Enter yes or no)?" yn
+			case $yn in
+				[Yy]* ) #Update base operating system
+			   	sudo apt-get update; sudo apt-get upgrade
+		  		
+		  		break;;
+				[Nn]* ) break;;
+				* ) echo "Please answer yes or no.";;
+			esac
+		done
+        
+        break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+
+
+
 #Get latest version of loop-server
 sudo git -C /jet/www/default/vendor/atomjump/loop-server pull
 
